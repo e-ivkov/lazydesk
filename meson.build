@@ -26,6 +26,7 @@ subdir('daemon')
 subdir('ctl')
 subdir('menu')
 subdir('tools')
+subdir('wm')
 subdir('tests')
 
 # Data, themes, config templates, skill, session script
