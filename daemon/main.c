@@ -34,6 +34,15 @@ static volatile sig_atomic_t g_stop;
 
 static void on_signal(int sig) { (void)sig; g_stop = 1; }
 
+/* Reap spawn children without stealing pclose()'s status: pclose sections
+ * block SIGCHLD (see run_capture); everything else gets reaped here. */
+static void on_sigchld(int sig)
+{
+	(void)sig;
+	while (waitpid(-1, nullptr, WNOHANG) > 0)
+		;
+}
+
 /* ---------- helpers ---------- */
 
 static void send_json(int fd, const cJSON *j)
@@ -81,7 +90,13 @@ static int run_capture(char *out, size_t outlen, const char *fmt, ...)
 	vsnprintf(cmd, sizeof cmd, fmt, ap);
 	va_end(ap);
 
-	FILE *p = popen(cmd, "r");
+	char guarded[2100];
+	snprintf(guarded, sizeof guarded, "timeout 3 %s", cmd);
+	sigset_t chld, oldmask;
+	sigemptyset(&chld);
+	sigaddset(&chld, SIGCHLD);
+	sigprocmask(SIG_BLOCK, &chld, &oldmask);
+	FILE *p = popen(guarded, "r");
 	if (!p) return -1;
 	size_t off = 0;
 	if (out && outlen)
@@ -91,9 +106,14 @@ static int run_capture(char *out, size_t outlen, const char *fmt, ...)
 		if (n == 0) break;
 		off += n;
 	}
-	out[off] = '\0';
+	if (out)
+		out[off] = '\0';
 	int st = pclose(p);
-	return WIFEXITED(st) ? WEXITSTATUS(st) : -1;
+	sigprocmask(SIG_SETMASK, &oldmask, nullptr);
+	int rc = WIFEXITED(st) ? WEXITSTATUS(st) : -1;
+	if (getenv("LAZYDESK_DEBUG"))
+		fprintf(stderr, "lazydeskd: run [%s] -> rc=%d\n", guarded, rc);
+	return rc;
 }
 
 /* ---------- op implementations ---------- */
@@ -310,7 +330,11 @@ int main(void)
 {
 	signal(SIGINT, on_signal);
 	signal(SIGTERM, on_signal);
-	signal(SIGCHLD, SIG_IGN); /* reap spawns */
+	struct sigaction sa = { 0 };
+	sa.sa_handler = on_sigchld;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = SA_RESTART | SA_NOCLDSTOP;
+	sigaction(SIGCHLD, &sa, nullptr);
 
 	const char *rtd = getenv("XDG_RUNTIME_DIR");
 	if (!rtd || !rtd[0]) {

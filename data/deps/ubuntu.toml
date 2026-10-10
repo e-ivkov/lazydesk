@@ -2,6 +2,7 @@
 [packages]
 quickshell = "quickshell"
 niri = "niri"
+xwayland-satellite = "xwayland-satellite"
 
 ghostty = "ghostty"
 chromium = "chromium"

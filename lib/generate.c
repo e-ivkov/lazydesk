@@ -139,7 +139,7 @@ size_t ld_emit_niri(const ld_config *c, char *buf, size_t buflen)
 
 	fprintf(f, "// --- startup\n");
 	fprintf(f, "spawn-at-startup \"lazydeskd\"\n");
-	fprintf(f, "spawn-at-startup \"quickshell\" \"-p\" \"$HOME/.config/lazydesk/generated/shell\"\n");
+	fprintf(f, "spawn-at-startup \"sh\" \"-c\" r#\"exec quickshell -p $HOME/.config/lazydesk/generated/shell\"#\n");
 	for (size_t i = 0; i < c->nspawns; i++) {
 		if (!c->spawns[i].autostart)
 			continue;
