@@ -3,15 +3,15 @@
 ## 1. Toolchain and skeleton (P1)
 
 - [x] 1.1 Install wlroots 0.20 + wayland/xkbcommon/libinput devel, wire a `wm/` meson target compiling a minimal wlroots program (display + autocreate backend + event loop), verify it runs nested (window under GNOME) and headless (WLR_BACKENDS) and exits cleanly
-- [ ] 1.2 Add scene graph, renderer, xdg-shell: map a test client, show it, close it, verify nested via screenshot or quickshell bar presence
-- [ ] 1.3 Implement maximize-on-map with usable-area computation (output minus layer-shell reserves) and keyboard focus, verify the regular-window scenario nested
+- [x] 1.2 Add scene graph, renderer, xdg-shell: map a test client, show it, close it, verify nested via screenshot or quickshell bar presence
+- [x] 1.3 Implement maximize-on-map with usable-area computation (output minus layer-shell reserves) and keyboard focus, verify the regular-window scenario nested
 
 ## 2. Workspaces, keymap, IPC (P1)
 
-- [ ] 2.1 Implement the workspaces engine (named archetypes from TOML via lazydesk-common, ad-hoc numbered, per-output, cleanup rule), verify the autospawn scenario nested
+- [x] 2.1 Implement the workspaces engine (named archetypes from TOML via lazydesk-common, ad-hoc numbered, per-output, cleanup rule), verify the autospawn scenario nested
 - [ ] 2.2 Implement keymap dispatch from the action registry (xkbcommon state, mods, pass-through of unbound Super grabs), verify each registry action fires and rebinds apply after reload
-- [ ] 2.3 Move the NDJSON socket into the compositor event loop (version, windows/workspaces list, focus, move, spawn, reload ops + event subscription), verify `lazydeskctl` unchanged against it nested and headless
-- [ ] 2.4 Implement spawn-with-archetype (app-id rules + class injection path parity), verify the two-ghostty routing scenario nested
+- [x] 2.3 Move the NDJSON socket into the compositor event loop (version, windows/workspaces list, focus, move, spawn, reload ops + event subscription), verify `lazydeskctl` unchanged against it nested and headless
+- [x] 2.4 Implement spawn-with-archetype (app-id rules + class injection path parity), verify the two-ghostty routing scenario nested
 
 ## 3. Daily-drivable (P2)
 

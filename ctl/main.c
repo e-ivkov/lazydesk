@@ -28,6 +28,9 @@ static const char *usage =
 "  workspaces list                  list workspaces\n"
 "  workspace focus <n|name>         focus a workspace (same as Super+<n>)\n"
 "  spawn [--archetype NAME] [--] <cmd...>   spawn a command (window routes by archetype)\n"
+"  window snap <edge>               snap focused window (left|right|top|bottom|restore)\n"
+"  window fullscreen | close | focus <id>\n"
+"  subscribe                        print the event stream until interrupted\n"
 "  config reload                    regenerate artifacts + reload backend\n"
 "  session quit                     quit the session\n";
 
@@ -149,6 +152,17 @@ int main(int argc, char **argv)
 		else
 			snprintf(request, sizeof request, "{\"op\":\"workspace.focus\",\"name\":\"%s\"}", a);
 	}
+	else if (!strcmp(verb, "window") && !strcmp(sub, "snap") && i + 2 < argc)
+		snprintf(request, sizeof request, "{\"op\":\"window.snap\",\"edge\":\"%s\"}", argv[i + 2]);
+	else if (!strcmp(verb, "window") && !strcmp(sub, "fullscreen"))
+		snprintf(request, sizeof request, "{\"op\":\"window.fullscreen\"}");
+	else if (!strcmp(verb, "window") && !strcmp(sub, "close"))
+		snprintf(request, sizeof request, i + 2 < argc
+			? "{\"op\":\"window.close\",\"id\":%s}" : "{\"op\":\"window.close\"}", argv[i + 2]);
+	else if (!strcmp(verb, "window") && !strcmp(sub, "focus") && i + 2 < argc)
+		snprintf(request, sizeof request, "{\"op\":\"window.focus\",\"id\":%s}", argv[i + 2]);
+	else if (!strcmp(verb, "subscribe"))
+		snprintf(request, sizeof request, "{\"op\":\"subscribe\"}");
 	else if (!strcmp(verb, "config") && !strcmp(sub, "reload"))
 		snprintf(request, sizeof request, "{\"op\":\"config.reload\"}");
 	else if (!strcmp(verb, "session") && !strcmp(sub, "quit"))
@@ -197,6 +211,26 @@ int main(int argc, char **argv)
 		return 1;
 	}
 	cJSON *reply = rpc(fd, request);
+	if (!strcmp(verb, "subscribe") && reply) {
+		cJSON_Delete(reply);
+		/* stream events */
+		char line[16384];
+		size_t off = 0;
+		for (;;) {
+			ssize_t n = read(fd, line + off, 1);
+			if (n <= 0) break;
+			if (line[off] == '\n') {
+				line[off] = 0;
+				puts(line);
+				fflush(stdout);
+				off = 0;
+			} else if (off + 1 < sizeof line) {
+				off++;
+			}
+		}
+		close(fd);
+		return 0;
+	}
 	close(fd);
 	return report(reply);
 }

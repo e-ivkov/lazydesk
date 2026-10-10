@@ -14,3 +14,7 @@ test('ipc acceptance', find_program('ipc.sh'),
   args : [join_paths(meson.build_root(), 'ctl/lazydeskctl'),
           join_paths(meson.build_root(), 'daemon/lazydeskd'),
           meson.source_root()])
+
+test('wm acceptance', find_program('wm.sh'),
+  args : [join_paths(meson.build_root(), 'wm/lazydesk-wm'),
+          join_paths(meson.build_root(), 'ctl/lazydeskctl')])

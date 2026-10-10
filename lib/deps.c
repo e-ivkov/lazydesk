@@ -17,6 +17,7 @@
 #include <unistd.h>
 
 #include "toml.h"
+#include "lazydesk-build.h"
 
 const char *ld_datadir(void)
 {
