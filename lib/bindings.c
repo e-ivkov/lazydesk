@@ -10,6 +10,7 @@
 static const ld_binding registry[] = {
 	/* launch & command group */
 	{ "palette.open",     "Launch",  "Super+Enter",     "Command palette",             LD_ACT_EXEC,     "lazydesk-menu", nullptr },
+	{ "scratchpad.toggle","Launch",  "Super+grave",     "Toggle scratchpad terminal",  LD_ACT_EXEC,     "ghostty +toggle-quick-terminal", nullptr },
 	{ "harness.summon",   "Launch",  "Super+a",         "Focus or spawn AI harness",   LD_ACT_CUSTOM,   "lazydeskctl harness summon", nullptr },
 	{ "terminal.spawn",   "Launch",  "Super+Backspace", "Terminal on this workspace",  LD_ACT_CUSTOM,   "lazydeskctl spawn --here --archetype terminal", nullptr },
 	{ "cockpit.open",     "Launch",  "Super+c",         "Cockpit dashboard",           LD_ACT_CUSTOM,   "lazydeskctl spawn --archetype cockpit", nullptr },
