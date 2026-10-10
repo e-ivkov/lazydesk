@@ -26,6 +26,16 @@ Note: Void's ghostty may lag upstream; a side-by-side AppImage works —
 
 Same as Debian (universe repo enabled; hyprland from 25.04+).
 
+## Login managers
+
+- **emptty** (Void default): scans only `/usr/share/wayland-sessions/` (or
+  `WAYLAND_SESSIONS_PATH`) plus `~/.local/share/wayland-sessions/`. LazyDesk's
+  entry installs to `<prefix>/share/wayland-sessions/`; with emptty, also copy
+  it: `install -Dm644 /usr/local/share/wayland-sessions/lazydesk.desktop
+  ~/.local/share/wayland-sessions/lazydesk.desktop` (the install CLI does this
+  when it detects emptty).
+- GDM/greetd/other XDG-compliant DMs pick the entry up from `$XDG_DATA_DIRS`.
+
 ## Runtime pieces LazyDesk provides itself
 
 lazydesk (install/update/doctor), lazydeskd (IPC facade), lazydeskctl,

@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=LazyDesk
 Comment=Development-first desktop (Niri + Quickshell + AI harness)
-Exec=lazydesk-session
+Exec=/usr/local/bin/lazydesk-session
 Type=Application
 DesktopNames=lazydesk
 Keywords=wayland;desktop;

@@ -5,6 +5,9 @@
 # lazydeskd, the Quickshell shell, and the autospawned archetype stack.
 set -eu
 
+# Greeter environments (emptty via runit) carry a minimal PATH; be explicit.
+export PATH="/usr/local/bin:$HOME/.local/bin:/usr/bin:/bin"
+
 : "${XDG_RUNTIME_DIR:=/run/user/$(id -u)}"
 export XDG_RUNTIME_DIR
 mkdir -p "$XDG_RUNTIME_DIR/lazydesk"
