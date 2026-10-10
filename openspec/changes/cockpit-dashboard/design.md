@@ -27,7 +27,7 @@ Cockpit lives on its workspace like any app (xdg-toplevel, maximized). Summon = 
 *Alternatives:* layer-shell overlay toggled over everything (wrong: hides context, fights with scratchpad semantics), separate monitor dashboard (non-goal for single-monitor laptop).
 
 ### D2: Rendering = cairo/pango like bar and palette
-Same stack as `lazydesk-bar`/`lazydesk-menu`: no GTK, no toolkit deps, theme tokens shared. The dashboard is dense text/sections — perfect for pango layouts and simple boxes. One `lazydesk-cockpit` process; keyboard-driven section navigation (arrows/enter), minimal pointer support (click on entries/actions).
+Same cairo/pango stack as `lazydesk-menu`: no GUI toolkit, theme tokens shared. The dashboard is dense text/sections — perfect for pango layouts and simple boxes. One `lazydesk-cockpit` process; keyboard-driven section navigation (arrows/enter), minimal pointer support (click on entries/actions).
 
 ### D3: Data pipeline = collectors + cache, all async
 A collector per section: `/proc` readers (CPU/mem/net/disk), device lists via IPC queries + udev-lite (`/sys` reads), WM stats via IPC events (it accumulates focus time by subscribing once at startup), git facts via `libgit2` (established C library — chosen over shelling `git` for speed and no-parse robustness), language breakdown via fast extension/size histogram honoring ignore rules (vendored `tokei`-like logic, count-only). Each collector runs on its own schedule, publishes into a shared snapshot guarded by a rwlock; rendering reads snapshots only. Budgets: scan time and file-count caps per project, configurable.

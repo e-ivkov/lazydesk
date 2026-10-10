@@ -10,7 +10,7 @@ Toolchain: C23 (gcc >= 14 or clang >= 18), meson >= 1.5, ninja.
 
 ### Void Linux (xbps)
 
-    sudo xbps-install -S Hyprland waybar mako ghostty chromium Telegram-desktop \
+    sudo xbps-install -S Hyprland quickshell ghostty chromium Telegram-desktop \
       thunar lazygit grim slurp wl-clipboard cliphist brightnessctl pipewire seatd
 
 Note: Void's ghostty may lag upstream; a side-by-side AppImage works —
@@ -18,7 +18,7 @@ Note: Void's ghostty may lag upstream; a side-by-side AppImage works —
 
 ### Debian (apt)
 
-    sudo apt install hyprland waybar mako-notifications ghostty chromium \
+    sudo apt install hyprland quickshell ghostty chromium \
       telegram-desktop thunar lazygit grim slurp wl-clipboard cliphist \
       brightnessctl pipewire
 

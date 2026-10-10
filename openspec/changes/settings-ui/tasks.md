@@ -7,7 +7,7 @@
 
 ## 2. Application shell
 
-- [ ] 2.1 Create `lazydesk-settings` GTK4 app on the `desk` archetype with generated theme CSS from `theme.toml`, verify summon scenario (`Super+comma`)
+- [ ] 2.1 Create `lazydesk-settings` QtQuick app on the `desk` archetype importing the shared theme QML module, verify summon scenario (`Super+comma`)
 - [ ] 2.2 Implement section navigation (archetypes, spawn, bindings, rules, scratchpad, outputs/idle, categories, theme, advanced/unknown), verify each section renders its schema keys
 
 ## 3. Editors and validation

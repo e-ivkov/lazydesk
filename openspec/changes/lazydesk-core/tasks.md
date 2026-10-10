@@ -10,12 +10,12 @@
 
 - [ ] 2.1 Implement TOML config model (archetypes, bindings, rules, spawns, scratchpad, harness, idle, outputs, theme, categories) with validation and previous-good semantics, verify an invalid edit is rejected with the offending key named
 - [ ] 2.2 Implement the generator emitting `hyprland.conf` (bindings, windowrules, workspaces, exec-once, env) with `# lazydesk-managed` markers, verify a headless Hyprland loads the generated config with zero warnings
-- [ ] 2.3 Emit waybar config+CSS, mako config, and ghostty include from the same model (incl. theme tokens and quick-terminal stanza), verify each component starts with its generated file
+- [ ] 2.3 Emit the Quickshell shell config (bar, action menu, cheatsheet, notifications, OSD) with theme tokens as a QML module, plus the ghostty include (theme, quick-terminal stanza), from the same model, verify the Quickshell shell starts with its generated config
 - [ ] 2.4 Implement drift detection for managed artifacts, verify the hand-edited-managed-file scenario (refuses silent overwrite, reports drift)
 
 ## 3. Session and window policy
 
-- [ ] 3.1 Implement `lazydesk-session` (env export, socket dir, Hyprland launch with generated config, component startup incl. `lazydeskd` and waybar), verify login reaches a desktop with bar on a test machine
+- [ ] 3.1 Implement `lazydesk-session` (env export, socket dir, Hyprland launch with generated config, component startup incl. `lazydeskd` and the Quickshell shell), verify login reaches a desktop with bar on a test machine
 - [ ] 3.2 Implement maximized-by-default policy via generated windowrules (dialogs/transients float, per-app overrides), verify the file-picker, forced-maximize, and second-window scenarios from the window-management spec
 - [ ] 3.3 Implement archetype routing rules + spawn-wrapper class injection (two-ghostty scenario), verify every workspaces-spec scenario incl. alternative bindings (editor→nvim, browser→firefox, terminal→foot)
 - [ ] 3.4 Implement snapping binds (halves, quarters, restore), fullscreen toggle, focus cycling, urgency passthrough, verify against the window-management and workspaces scenarios
@@ -31,7 +31,7 @@
 ## 5. Keymap, bar, palette
 
 - [ ] 5.1 Implement the default binding table through the generator (see keybindings spec incl. Super+Backspace/c/comma/e), verify each binding triggers its action on a live session
-- [ ] 5.2 Generate the waybar action menu and keybinding cheatsheet from the binding registry, verify menu-item-equals-keybinding, rebound-key-reflected, and cheatsheet-reflects-rebinds scenarios
+- [ ] 5.2 Generate the Quickshell action menu and keybinding cheatsheet from the binding registry, verify menu-item-equals-keybinding, rebound-key-reflected, and cheatsheet-reflects-rebinds scenarios
 - [ ] 5.3 Implement `lazydesk-menu` palette (layer-shell, three input modes, fuzzy+tree+history, verb completion, shell passthrough), verify all command-palette spec scenarios
 - [ ] 5.4 Implement Super-passthrough behavior: unbound Super combos reach apps that grabbed them
 
@@ -39,7 +39,7 @@
 
 - [ ] 6.1 Wire the scratchpad to Ghostty quick terminal via generated config + bind, verify toggle-over-anything, persistent-state, exit-and-respawn, and configurable-command scenarios
 - [ ] 6.2 Implement autospawn entries (env vars `LAZYDESK*`, failure notification without blocking), verify normal-login and failing-entry scenarios
-- [ ] 6.3 Ship theme packs (catppuccin-mocha default, catppuccin-latte, gruvbox-dark, tokyo-night) with generator output for bar/palette/mako/ghostty, verify restyle-on-reload and light-theme-switch scenarios
+- [ ] 6.3 Ship theme packs (catppuccin-mocha default, catppuccin-latte, gruvbox-dark, tokyo-night) with generator output for the Quickshell shell/palette/ghostty, verify restyle-on-reload and light-theme-switch scenarios
 
 ## 7. Harness integration
 

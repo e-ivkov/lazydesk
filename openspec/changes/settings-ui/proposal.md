@@ -8,7 +8,7 @@ Config-as-API (TOML + hot reload) is perfect for agents and terminal people, but
 
 Introduces `lazydesk-settings`, a graphical settings client:
 
-- Runs maximized on the `desk` archetype workspace; summoned via `Super+comma`, palette verb `> settings`, or IPC; fully functional agentless.
+- Runs maximized on the `desk` archetype workspace (QtQuick app sharing the shell's theme QML module); summoned via `Super+comma`, palette verb `> settings`, or IPC; fully functional agentless.
 - Edits every documented setting: archetype→app bindings (with per-archetype alternatives), autospawn entries, keybindings with press-to-record editing, window rules, scratchpad geometry, idle/outputs, palette categories tree, theme selection.
 - Writes only the documented TOML files (no hidden state), validates before writing, applies via IPC reload, and surfaces reload errors inline.
 - Detects external edits (agent or editor) while open and offers re-reading; never clobbers concurrent changes silently.
@@ -25,6 +25,6 @@ Introduces `lazydesk-settings`, a graphical settings client:
 
 ## Impact
 
-- New binary `lazydesk-settings` in the monorepo.
-- First GTK4 dependency in the DE (settings is the one surface where form widgets beat hand-rolled cairo); theme consistency maintained by generating GTK CSS from the shared theme tokens.
+- New binary `lazydesk-settings` in the monorepo (QtQuick/QML).
+- Qt joins the stack as the DE's GUI toolkit family: settings shares the exact theme QML module the Quickshell shell renders from — one look, one import, zero CSS glue.
 - Depends on change `lazydesk-core` (archetypes, IPC, config reload).

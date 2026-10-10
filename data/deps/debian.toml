@@ -1,8 +1,7 @@
 # LazyDesk dependency map — Debian (apt)
 [packages]
 hyprland = "hyprland"
-waybar = "waybar"
-mako = "mako-notifications"
+
 ghostty = "ghostty"
 chromium = "chromium"
 telegram-desktop = "telegram-desktop"

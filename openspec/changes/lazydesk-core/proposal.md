@@ -8,7 +8,7 @@ A solo C/Rust developer's ideal desktop — maximized-first archetype workspaces
 
 This is the first working LazyDesk session, as a packageable DE on the Hyprland backend:
 
-- **TOML as the single source of truth** (`~/.config/lazydesk/`): archetypes, bindings, window rules, spawn entries, scratchpad, harness, idle, outputs, themes, palette categories. A generator emits backend configs (hyprland.conf), component configs (bar, notifications, terminal), and the keybinding registry — managed artifacts are marked and drift-checked.
+- **TOML as the single source of truth** (`~/.config/lazydesk/`): archetypes, bindings, window rules, spawn entries, scratchpad, harness, idle, outputs, themes, palette categories. A generator emits backend configs (hyprland.conf), the Quickshell shell config (bar, action menu, cheatsheet, notifications, OSD), the terminal include, and the keybinding registry — managed artifacts are marked and drift-checked.
 - **`lazydeskd` + `lazydeskctl`: LazyDesk's own stable IPC facade** (NDJSON socket, event stream, every action) over the compositor's IPC; clients and AI agents never touch backend IPC, so the backend stays swappable (sway adapter possible later).
 - Archetype workspaces routed by app-id/class rules + a spawn wrapper that injects distinguishing classes for same-binary archetypes (a Pi terminal and a plain terminal side by side).
 - Maximimized-by-default window policy via backend rules: dialogs/transients float, per-app overrides, half/quarter snapping, no tiling tree.
@@ -16,7 +16,7 @@ This is the first working LazyDesk session, as a packageable DE on the Hyprland 
 - One command palette (`lazydesk-menu`, our layer-shell client): fuzzy apps over a category tree, `>` WM verbs, `!` shell passthrough.
 - Scratchpad via Ghostty's built-in quick terminal (zero custom code); idle screen-off without any lock screen; autospawned stack with `LAZYDESK_*` environment.
 - Harness integration: `Super+a` focus-or-spawn Pi, shipped `lazydesk` agent skill, harness-driven app categorization, agent-editable hot-reloadable config, guaranteed agentless fallback mode.
-- Consistent minimal theming from one token set: catppuccin-mocha default (matching the Pi harness theme), catppuccin-latte, and common dark alternatives; waybar bar + mako notifications themed from the same tokens.
+- Consistent minimal theming from one token set: catppuccin-mocha default (matching the Pi harness theme), catppuccin-latte, and common dark alternatives — rendered by one Quickshell shell (bar, menu, notifications, OSD).
 - **Packaging**: `lazydesk` install/update/doctor CLI (Void first-class, Debian/Ubuntu supported, no systemd assumption), dry-run mode, portable declarative user config — and install completeness: every shipped archetype must end up filled with a launchable app or be explicitly reported.
 - **System controls** on established utilities: screenshots and region capture, screen recording, persistent clipboard history, volume/brightness keys with OSD, battery notifications — wired via generated binds and scripts, no custom daemons.
 
@@ -45,5 +45,5 @@ Out of scope for this change (follow-ups): the cockpit dashboard (`cockpit-dashb
 ## Impact
 
 - New monorepo: `lazydeskd` (facade daemon), `lazydeskctl` (CLI), `lazydesk-menu` (palette client), `lazydesk` (install/update CLI + generator), session scripts, agent skill, docs, theme packs, config templates; C23 + meson for binaries, POSIX shell where a script beats C.
-- Runtime dependencies: Hyprland (backend), ghostty, waybar, mako, Thunar (files archetype), plus small utilities; all packaged on Void/Debian/Ubuntu.
+- Runtime dependencies: Hyprland (backend), ghostty, quickshell (shell surfaces), Thunar (files archetype), plus small utilities; all packaged on Void/Debian/Ubuntu.
 - The user's daily machine (Void) is the test bed; `foundation-maximized-shell` (own-compositor design) is retired from the plan — its behavior specs were carried into this change, only the foundation decision changed.

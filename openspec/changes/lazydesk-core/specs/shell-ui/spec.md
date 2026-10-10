@@ -46,7 +46,7 @@ The "show keybindings" bar menu entry SHALL open an overlay listing all current 
 - **THEN** the new combination is shown for that action
 
 ### Requirement: Consistent notifications
-Notifications SHALL be rendered by a notification daemon (mako) themed from the shared LazyDesk palette and configured by the session. Notifications MUST appear above maximized windows and the bar, respect urgency styling, and MUST NOT steal keyboard focus. A DND toggle SHALL be exposed via palette verb and IPC.
+Notifications SHALL be rendered by the DE's shell component (Quickshell) themed from the shared LazyDesk palette. Notifications MUST appear above maximized windows and the bar, respect urgency styling, and MUST NOT steal keyboard focus. A DND toggle SHALL be exposed via palette verb and IPC.
 
 #### Scenario: Spawn failure notifies
 - **WHEN** an autospawn entry fails

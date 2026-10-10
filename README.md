@@ -7,7 +7,8 @@ one command palette (`Super+Enter`), Ghostty quick-terminal scratchpad, an
 AI-harness (Pi) as a first-class citizen with a guaranteed agentless fallback.
 
 - TOML under `~/.config/lazydesk/` is the single source of truth; a generator
-  emits `hyprland.conf`, waybar, mako and ghostty configs (marked, drift-checked).
+  emits `hyprland.conf`, the Quickshell shell (bar, menu, notifications) and ghostty
+  configs (marked, drift-checked).
 - `lazydeskd` exposes LazyDesk's own NDJSON IPC; `lazydeskctl` is the CLI.
   Clients never touch backend IPC.
 - Everything keybindable is clickable (bar action menu + cheatsheet generated
