@@ -18,7 +18,7 @@ The configuration SHALL define an ordered set of archetype workspaces. Shipped d
 - **THEN** the window opens maximized on the focused workspace
 
 ### Requirement: Spawn wrapper tags same-binary archetypes
-The DE's spawn operation (`lazywmctl spawn --archetype <name>`) SHALL, for apps that support it, launch the command with an archetype-distinguishing app id/class (e.g. Ghostty's `--class`), so multiple instances of the same binary can be bound to different archetypes (a Pi terminal and a plain terminal side by side). Where an app cannot be tagged, plain matching rules SHALL be used.
+The DE's spawn operation (`lazydeskctl spawn --archetype <name>`) SHALL, for apps that support it, launch the command with an archetype-distinguishing app id/class (e.g. Ghostty's `--class`), so multiple instances of the same binary can be bound to different archetypes (a Pi terminal and a plain terminal side by side). Where an app cannot be tagged, plain matching rules SHALL be used.
 
 #### Scenario: Two terminals, two archetypes
 - **WHEN** the session spawns a Pi harness terminal on `agent` and a plain terminal on `terminal`, both Ghostty
@@ -39,8 +39,8 @@ Workspace semantics MUST depend only on the archetype, never on the concrete app
 - **WHEN** the shipped defaults are tested with sane alternative bindings per core archetype (editor: nvim-in-terminal, browser: Firefox, terminal: a second terminal, messenger: a second client)
 - **THEN** all workspace, focus, urgency, and palette behaviors pass identically for each alternative
 
-### Requirement: Cockpit, lazygit, lazywm, and files archetypes
-Beyond the app-replacement archetypes, the configuration SHALL include: `cockpit` (dashboard component, see the cockpit-dashboard change), `lazygit` (terminal git client), `lazywm` (the DE's own surfaces: settings and future DE tools), and `files` (file manager). `lazywm` and `files` ship unnumbered by default but MUST be assignable a workspace number like any other archetype.
+### Requirement: Cockpit, lazygit, desk, and files archetypes
+Beyond the app-replacement archetypes, the configuration SHALL include: `cockpit` (dashboard component, see the cockpit-dashboard change), `lazygit` (terminal git client), `desk` (the DE's own surfaces: settings and future DE tools), and `files` (file manager). `desk` and `files` ship unnumbered by default but MUST be assignable a workspace number like any other archetype.
 
 #### Scenario: Lazygit one keystroke away
 - **WHEN** the user presses `Super+7`
@@ -65,7 +65,7 @@ The user SHALL be able to create additional unnamed numbered workspaces on deman
 Each output SHALL have its own independent set of workspaces. Archetype workspaces live on the output designated in configuration (default: first output). The user SHALL be able to focus outputs and move workspaces between outputs via IPC and keybindings. With a single monitor configured, behavior MUST be identical to the single-output model.
 
 #### Scenario: Laptop single screen
-- **WHEN** LazyWM runs with one output
+- **WHEN** LazyDesk runs with one output
 - **THEN** all archetype and ad-hoc workspaces live on that output and `Super+number` cycles among them
 
 #### Scenario: Second monitor attached

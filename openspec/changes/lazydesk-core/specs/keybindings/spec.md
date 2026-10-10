@@ -7,18 +7,18 @@ Defines the keyboard control surface: Super as the modifier, the default binding
 ## ADDED Requirements
 
 ### Requirement: Super is the modifier
-All LazyWM bindings SHALL use Super (Mod4) as the primary modifier. LazyWM MUST NOT intercept keys when Super is not involved, and MUST pass unrecognized Super combinations through to the focused client when the focused app has grabbed them (e.g. editor chords).
+All LazyDesk bindings SHALL use Super (Mod4) as the primary modifier. LazyDesk MUST NOT intercept keys when Super is not involved, and MUST pass unrecognized Super combinations through to the focused client when the focused app has grabbed them (e.g. editor chords).
 
 #### Scenario: Plain typing unaffected
 - **WHEN** a user types in Ghostty without Super held
 - **THEN** every keystroke reaches Ghostty unmodified
 
 #### Scenario: Unused Super chord passes through
-- **WHEN** the focused app has registered a Super-based shortcut not bound in LazyWM
+- **WHEN** the focused app has registered a Super-based shortcut not bound in LazyDesk
 - **THEN** the app receives the key event
 
 ### Requirement: Default workspace and window bindings
-LazyWM SHALL ship these defaults, every entry rebindable:
+LazyDesk SHALL ship these defaults, every entry rebindable:
 
 - `Super+1..9,0` switch to workspace N; `Super+Shift+…` move window there
 - `Super+n` new ad-hoc workspace
@@ -31,13 +31,13 @@ LazyWM SHALL ship these defaults, every entry rebindable:
 - **THEN** the `browser` workspace becomes focused on the current output and its topmost window takes keyboard focus
 
 ### Requirement: Default launch and command bindings
-LazyWM SHALL ship these defaults, every entry rebindable:
+LazyDesk SHALL ship these defaults, every entry rebindable:
 
 - `Super+Enter` command palette
 - `Super+grave` toggle scratchpad terminal
 - `Super+a` focus-or-spawn default harness (agentless fallback: terminal)
 - `Super+Backspace` terminal on the focused workspace (`terminal` archetype command)
-- `Super+c` cockpit; `Super+comma` settings (`lazywm` workspace); `Super+e` file manager at `~/projects`
+- `Super+c` cockpit; `Super+comma` settings (`desk` workspace); `Super+e` file manager at `~/projects`
 - `Super+Escape` reload config; `Super+Shift+Escape` quit with confirmation
 
 #### Scenario: Quick terminal anywhere
@@ -46,7 +46,7 @@ LazyWM SHALL ship these defaults, every entry rebindable:
 
 #### Scenario: Quit confirmation
 - **WHEN** the user presses `Super+Shift+Escape`
-- **THEN** the palette opens with a quit prompt and LazyWM exits only after confirmation
+- **THEN** the palette opens with a quit prompt and LazyDesk exits only after confirmation
 
 ### Requirement: User rebinding
 The configuration MUST allow rebinding every action, adding bindings for any IPC verb, and removing default bindings. A configuration containing a binding conflict or unknown action MUST be rejected at load with the offending entry reported, keeping the previous bindings active.

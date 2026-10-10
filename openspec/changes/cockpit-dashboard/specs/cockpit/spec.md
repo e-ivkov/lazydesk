@@ -86,7 +86,7 @@ The cockpit MUST NOT modify anything under `~/projects` or `~/work`; its only wr
 
 #### Scenario: No side effects
 - **WHEN** a full projects and work scan completes
-- **THEN** `git status` in every scanned repository is unchanged and no file outside `~/.cache/lazywm/` has a new mtime from cockpit
+- **THEN** `git status` in every scanned repository is unchanged and no file outside `~/.cache/lazydesk/` has a new mtime from cockpit
 
 ### Requirement: Actions use public IPC only
 Every cockpit action MUST be expressed as public IPC operations (spawn, workspace focus) — no privileged or cockpit-only compositor path SHALL exist, so any agent or script can reproduce cockpit actions exactly.

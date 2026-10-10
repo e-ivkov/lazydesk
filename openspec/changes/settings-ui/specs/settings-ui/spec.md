@@ -6,12 +6,12 @@ Defines the graphical configuration UI: full coverage of documented settings, va
 
 ## ADDED Requirements
 
-### Requirement: Settings surface on the lazywm workspace
-The settings UI SHALL be provided as a client running maximized on the `lazywm` archetype workspace, summoned via the configured binding (default `Super+comma`), a palette verb, or IPC, and MUST work identically with or without an AI harness present.
+### Requirement: Settings surface on the lazydesk workspace
+The settings UI SHALL be provided as a client running maximized on the `desk` archetype workspace, summoned via the configured binding (default `Super+comma`), a palette verb, or IPC, and MUST work identically with or without an AI harness present.
 
 #### Scenario: Summon settings
 - **WHEN** the user presses `Super+comma` from any workspace
-- **THEN** the `lazywm` workspace is focused with the settings UI maximized on it
+- **THEN** the `desk` workspace is focused with the settings UI maximized on it
 
 ### Requirement: Full coverage of documented settings
 The UI SHALL expose every setting documented in the configuration reference: archetype→app bindings (with the tested alternatives selectable), startup spawn entries, keybindings, window rules, scratchpad geometry and command, idle and output options, palette category tree, and theme choice. Any setting present in the files but unknown to the UI MUST be preserved untouched on write, and the UI MUST visibly list such unknown keys rather than hiding them.
@@ -35,7 +35,7 @@ The UI MUST validate the complete resulting configuration before writing, reject
 If a configuration file changes on disk while the UI has unsaved edits (e.g. an agent rewrote a binding), the UI MUST detect it before writing and offer a resolution: re-read external changes, keep local edits, or show a diff — it MUST NOT silently overwrite the external change.
 
 #### Scenario: Agent edits while settings open
-- **WHEN** the harness rewrites `lazywm.toml` while the settings UI holds unsaved edits and the user clicks apply
+- **WHEN** the harness rewrites `lazydesk.toml` while the settings UI holds unsaved edits and the user clicks apply
 - **THEN** the UI presents the conflict and writes nothing until the user resolves it
 
 ### Requirement: Single source of truth

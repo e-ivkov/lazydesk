@@ -18,24 +18,24 @@ Configuration SHALL name a default harness (default: `pi` inside the configured 
 - **THEN** the harness command is spawned on the pi workspace
 
 ### Requirement: The DE is harness-controllable
-Because every action is an IPC operation, the running harness MUST be able to fully observe and drive the session through `lazywmctl` (list windows, move focus, spawn, reconfigure), using only its normal shell access. No harness-specific privilege path SHALL exist.
+Because every action is an IPC operation, the running harness MUST be able to fully observe and drive the session through `lazydeskctl` (list windows, move focus, spawn, reconfigure), using only its normal shell access. No harness-specific privilege path SHALL exist.
 
 #### Scenario: Agent rearranges the session
 - **WHEN** the user asks the harness to "open the browser next to chat"
-- **THEN** the agent runs `lazywmctl` verbs that focus `browser`, snap windows as asked, and the desktop reflects it
+- **THEN** the agent runs `lazydeskctl` verbs that focus `browser`, snap windows as asked, and the desktop reflects it
 
-### Requirement: Shipped lazywm agent skill
-The repository SHALL ship an agent skill (`lazywm`) that documents the IPC, configuration format, keybindings, and safe reconfiguration procedure, installable into the default harness's skill directory at session setup (idempotent, never overwriting user edits).
+### Requirement: Shipped lazydesk agent skill
+The repository SHALL ship an agent skill (`lazydesk`) that documents the IPC, configuration format, keybindings, and safe reconfiguration procedure, installable into the default harness's skill directory at session setup (idempotent, never overwriting user edits).
 
 #### Scenario: Skill available to Pi
 - **WHEN** a session starts and Pi is the default harness
-- **THEN** `lazywm` appears among the agent's skills with current IPC documentation
+- **THEN** `lazydesk` appears among the agent's skills with current IPC documentation
 
 ### Requirement: Harness-driven app categorization
-The palette's category tree SHALL be regenerable by the default harness: a `lazywmctl apps categorize` command composes a prompt (installed desktop entries + current tree) and invokes the default harness non-interactively to produce a new tree, which is written to configuration only after validation (valid categories, every entry still reachable). Manual edits and manual lock flags MUST survive regeneration.
+The palette's category tree SHALL be regenerable by the default harness: a `lazydeskctl apps categorize` command composes a prompt (installed desktop entries + current tree) and invokes the default harness non-interactively to produce a new tree, which is written to configuration only after validation (valid categories, every entry still reachable). Manual edits and manual lock flags MUST survive regeneration.
 
 #### Scenario: First categorization
-- **WHEN** `lazywmctl apps categorize` runs on a fresh install
+- **WHEN** `lazydeskctl apps categorize` runs on a fresh install
 - **THEN** the harness proposes a tree, it is validated and saved, and the palette immediately groups apps by it
 
 #### Scenario: Bad proposal rejected
@@ -50,7 +50,7 @@ The DE MUST remain fully functional with no harness installed: archetypes resolv
 - **THEN** autospawn, workspaces, palette, scratchpad, cockpit, and settings all function, with AI-derived features visibly marked unavailable
 
 #### Scenario: Categorize without a harness
-- **WHEN** `lazywmctl apps categorize` runs with no harness configured
+- **WHEN** `lazydeskctl apps categorize` runs with no harness configured
 - **THEN** it exits non-zero with an explanatory message and configuration is untouched
 
 ### Requirement: Harness summon has an agentless fallback
@@ -64,5 +64,5 @@ The DE MUST remain fully functional with no harness installed: archetypes resolv
 All session behavior (archetypes, bindings, rules, spawn entries, theme values) SHALL live in hot-reloadable TOML files under the standard config directory. An agent editing and reloading these files MUST achieve the same results as any built-in settings path; there is no second, hidden store.
 
 #### Scenario: Agent changes a binding
-- **WHEN** the harness rewrites a binding in `lazywm.toml` and calls `lazywmctl config reload`
+- **WHEN** the harness rewrites a binding in `lazydesk.toml` and calls `lazydeskctl config reload`
 - **THEN** the reload event fires and the new binding works, with no restart

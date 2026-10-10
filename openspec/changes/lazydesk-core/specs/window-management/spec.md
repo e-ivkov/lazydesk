@@ -36,7 +36,7 @@ The configuration MUST allow per-app placement rules matching on app id (Wayland
 - **THEN** the window is maximized like a regular window
 
 #### Scenario: Float override via IPC
-- **WHEN** `lazywmctl float <window> on` is issued for the focused window
+- **WHEN** `lazydeskctl float <window> on` is issued for the focused window
 - **THEN** the window switches to floating centered at its chosen size immediately
 
 ### Requirement: Half and quarter snapping
@@ -69,5 +69,5 @@ The user SHALL be able to cycle keyboard focus among all windows on the current 
 - **THEN** the other window is focused and raised if floating
 
 #### Scenario: Close unresponsive window
-- **WHEN** `lazywmctl kill <window>` is issued for a window that ignores a graceful close
+- **WHEN** `lazydeskctl kill <window>` is issued for a window that ignores a graceful close
 - **THEN** the window's client connection is destroyed and it disappears from all listings

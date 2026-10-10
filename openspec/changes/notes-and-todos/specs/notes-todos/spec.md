@@ -21,7 +21,7 @@ Notes SHALL be stored as one markdown file per note in the configured notes dire
 The palette SHALL support `todo <text>` committing a new todo and `note <text>` committing a new note (both accepting `#tags`), each completing without leaving the current window or workspace and confirming with a transient result row. Bare `todo` SHALL open a listing with complete/reopen/delete on entries; bare `note` SHALL open a recency-ranked quick-open of notes.
 
 #### Scenario: Capture a todo mid-work
-- **WHEN** the user presses `Super+Enter`, types `todo fix borrow checker error #lazywm`, presses `Enter`
+- **WHEN** the user presses `Super+Enter`, types `todo fix borrow checker error #lazydesk`, presses `Enter`
 - **THEN** the todo exists, the palette closes, and the previously focused window regains focus
 
 #### Scenario: Capture a tagged note
@@ -43,7 +43,7 @@ Todos SHALL support add, complete, reopen, and delete from: the palette listing,
 - **THEN** `grep` shows the corresponding `- [x]` line in `~/notes/todo.md`
 
 ### Requirement: Zoomable notes browser
-The notes browser (`lazywm-notes`, opened via palette, verb, or bind, on the `lazywm` archetype workspace) SHALL have two zoom levels: an overview rendering every note's full content inline (not just titles) ordered by recency, and a focused single-note view for reading with an edit action that hands off to the editor archetype. Tag filtering SHALL narrow both levels; zoom transitions MUST NOT lose filter state.
+The notes browser (`lazydesk-notes`, opened via palette, verb, or bind, on the `desk` archetype workspace) SHALL have two zoom levels: an overview rendering every note's full content inline (not just titles) ordered by recency, and a focused single-note view for reading with an edit action that hands off to the editor archetype. Tag filtering SHALL narrow both levels; zoom transitions MUST NOT lose filter state.
 
 #### Scenario: Zoomed out shows everything
 - **WHEN** the user opens the browser and no filter is set
@@ -64,5 +64,5 @@ Default ordering everywhere (browser overview, palette quick-open, cockpit panel
 IPC/CLI verbs SHALL cover `todo add|done|reopen|rm|list` and `note add|list|show`, usable headlessly by agents and scripts with `--json` output.
 
 #### Scenario: Agent works the todo list
-- **WHEN** `lazywmctl todo add "review IPC docs" #lazywm && lazywmctl --json todo list` runs
+- **WHEN** `lazydeskctl todo add "review IPC docs" #lazydesk && lazydeskctl --json todo list` runs
 - **THEN** the JSON list contains the new todo with its tag

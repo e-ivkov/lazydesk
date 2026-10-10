@@ -2,12 +2,12 @@
 
 ## Purpose
 
-Defines the machine control plane of the DE: a LazyWM-owned local socket protocol exposing every WM operation and a live event stream, consumed by `lazywmctl`, the palette, the bar, scripts, and the AI harness — with the underlying compositor's IPC hidden as an implementation detail.
+Defines the machine control plane of the DE: a LazyDesk-owned local socket protocol exposing every WM operation and a live event stream, consumed by `lazydeskctl`, the palette, the bar, scripts, and the AI harness — with the underlying compositor's IPC hidden as an implementation detail.
 
 ## ADDED Requirements
 
 ### Requirement: Every user action is an IPC operation
-The DE SHALL expose a Unix-socket protocol at `$XDG_RUNTIME_DIR/lazywm/ipc.sock` speaking newline-delimited JSON requests and responses. Every operation reachable by keybinding or palette verb SHALL be reachable by IPC, plus query operations: list outputs, workspaces, windows (with archetype, workspace, app id, geometry, and state). Actions are idempotent where meaningful.
+The DE SHALL expose a Unix-socket protocol at `$XDG_RUNTIME_DIR/lazydesk/ipc.sock` speaking newline-delimited JSON requests and responses. Every operation reachable by keybinding or palette verb SHALL be reachable by IPC, plus query operations: list outputs, workspaces, windows (with archetype, workspace, app id, geometry, and state). Actions are idempotent where meaningful.
 
 #### Scenario: List windows from a script
 - **WHEN** a client sends `{"op": "windows.list"}`
@@ -24,26 +24,26 @@ A client SHALL be able to subscribe to events (`window.map`, `window.unmap`, `wi
 - **WHEN** the user presses `Super+2` while a subscribed bar client is connected
 - **THEN** the client receives `{"event": "workspace.focus", "workspace": 2, "name": "editor"}`
 
-### Requirement: lazywmctl CLI
-The `lazywmctl` binary SHALL wrap the protocol with a conventional CLI (`lazywmctl <verb> [args]`, `lazywmctl watch`, `lazywmctl events`, JSON output mode for scripting) and exit non-zero with a readable error on protocol failures. It MUST be usable in pipelines by both scripts and AI agents without a TTY.
+### Requirement: lazydeskctl CLI
+The `lazydeskctl` binary SHALL wrap the protocol with a conventional CLI (`lazydeskctl <verb> [args]`, `lazydeskctl watch`, `lazydeskctl events`, JSON output mode for scripting) and exit non-zero with a readable error on protocol failures. It MUST be usable in pipelines by both scripts and AI agents without a TTY.
 
 #### Scenario: Scriptable window query
-- **WHEN** `lazywmctl --json windows list` runs in a script
+- **WHEN** `lazydeskctl --json windows list` runs in a script
 - **THEN** it prints machine-readable JSON and exits 0
 
 #### Scenario: Error reporting
-- **WHEN** `lazywmctl snap bogus-direction` runs
+- **WHEN** `lazydeskctl snap bogus-direction` runs
 - **THEN** it prints the protocol error message to stderr and exits non-zero
 
 ### Requirement: Spawn with archetype over IPC
 IPC SHALL include a spawn operation with optional archetype and workspace arguments, used by autospawn, the palette, and external agents; where the app supports it the spawn injects a distinguishing app id/class (see workspaces spec).
 
 #### Scenario: Agent spawns a terminal on a workspace
-- **WHEN** `lazywmctl spawn --archetype agent -- ghostty -e pi` runs
+- **WHEN** `lazydeskctl spawn --archetype agent -- ghostty -e pi` runs
 - **THEN** the process starts and its window lands on the agent workspace
 
 ### Requirement: Facade stability over the compositor
-The LazyWM protocol SHALL be the stable, documented control surface: clients MUST NOT need to know or use the underlying compositor's IPC. Replacing the compositor backend MUST remain possible without changing any client. Unknown operations MUST return a structured error, never crash the facade, and a backend failure MUST be reported as a structured error with the backend cause summarized.
+The LazyDesk protocol SHALL be the stable, documented control surface: clients MUST NOT need to know or use the underlying compositor's IPC. Replacing the compositor backend MUST remain possible without changing any client. Unknown operations MUST return a structured error, never crash the facade, and a backend failure MUST be reported as a structured error with the backend cause summarized.
 
 #### Scenario: Malformed input tolerated
 - **WHEN** a client sends a non-JSON line to the socket

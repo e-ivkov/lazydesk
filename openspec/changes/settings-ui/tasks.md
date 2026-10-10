@@ -2,12 +2,12 @@
 
 ## 1. Schema and model
 
-- [ ] 1.1 Author `docs/config-schema.toml` (keys, types, defaults, widget hints, archetype alternatives) from the foundation config surface, verify every documented LazyWM key has an entry
+- [ ] 1.1 Author `docs/config-schema.toml` (keys, types, defaults, widget hints, archetype alternatives) from the foundation config surface, verify every documented LazyDesk key has an entry
 - [ ] 1.2 Implement schema-driven config model (load, validate, serialize with unknown-key and comment preservation), verify round-trip byte-stability on fixture files via property test
 
 ## 2. Application shell
 
-- [ ] 2.1 Create `lazywm-settings` GTK4 app on the `lazywm` archetype with generated theme CSS from `theme.toml`, verify summon scenario (`Super+comma`)
+- [ ] 2.1 Create `lazydesk-settings` GTK4 app on the `desk` archetype with generated theme CSS from `theme.toml`, verify summon scenario (`Super+comma`)
 - [ ] 2.2 Implement section navigation (archetypes, spawn, bindings, rules, scratchpad, outputs/idle, categories, theme, advanced/unknown), verify each section renders its schema keys
 
 ## 3. Editors and validation

@@ -42,8 +42,8 @@ On battery-capable machines the DE SHALL notify at a configurable low-battery th
 - **THEN** a notification appears and the next crossing of the critical threshold raises its urgency
 
 ### Requirement: Built on established utilities
-System controls SHALL be implemented atop established utilities (e.g. grim/slurp or equivalent capture tools, wf-recorder or equivalent, wl-clipboard + cliphist or equivalent, pactl, brightnessctl, an established OSD) wired through generated keybindings and small scripts. These functions MUST NOT depend on LazyWM's facade daemon being alive.
+System controls SHALL be implemented atop established utilities (e.g. grim/slurp or equivalent capture tools, wf-recorder or equivalent, wl-clipboard + cliphist or equivalent, pactl, brightnessctl, an established OSD) wired through generated keybindings and small scripts. These functions MUST NOT depend on LazyDesk's facade daemon being alive.
 
 #### Scenario: Controls survive facade restart
-- **WHEN** `lazywmd` is stopped and the user takes a screenshot, adjusts volume, and opens clipboard history
+- **WHEN** `lazydeskd` is stopped and the user takes a screenshot, adjusts volume, and opens clipboard history
 - **THEN** all three still function

@@ -2,7 +2,7 @@
 
 ## 1. Client skeleton and surface
 
-- [ ] 1.1 Create `lazywm-cockpit` process: window on the `cockpit` archetype, theme-token rendering, section layout skeleton, verify `Super+c` summon per the surface scenario
+- [ ] 1.1 Create `lazydesk-cockpit` process: window on the `cockpit` archetype, theme-token rendering, section layout skeleton, verify `Super+c` summon per the surface scenario
 - [ ] 1.2 Implement IPC subscription (workspace/window/focus events) and snapshot store with rwlock, verify the dashboard updates when windows open/close on another workspace
 
 ## 2. Collectors
@@ -22,7 +22,7 @@
 
 ## 4. AI summaries and actions
 
-- [ ] 4.1 Implement the shared harness-invocation helper with TTL cache under `~/.cache/lazywm/ai/`, verify agentless instant-degradation and cached-result reuse before TTL
+- [ ] 4.1 Implement the shared harness-invocation helper with TTL cache under `~/.cache/lazydesk/ai/`, verify agentless instant-degradation and cached-result reuse before TTL
 - [ ] 4.2 Wire project/work AI summaries with commit-based invalidation, verify agentless project-entry scenario
 - [ ] 4.3 Implement entry actions (open in editor / file manager / copy path) via public IPC only, verify the open-in-editor scenario and the no-side-effects scenario (`git status` unchanged, no mtimes outside cache)
 

@@ -6,7 +6,7 @@ The developer's attention is split across system health, WM state, AI activity, 
 
 ## What Changes
 
-Introduces `lazywm-cockpit`, a custom dashboard surface living on the `cockpit` archetype workspace (foundation change defines the archetype; default summon `Super+c`):
+Introduces `lazydesk-cockpit`, a custom dashboard surface living on the `cockpit` archetype workspace (foundation change defines the archetype; default summon `Super+c`):
 
 - Live system and devices overview: CPU/memory/swap, disk usage and I/O, network I/O, temperature and battery where available; outputs, input devices, storage.
 - WM overview: workspaces with window counts, focus-time statistics, config health (last reload result), IPC operation counters.
@@ -28,6 +28,6 @@ Introduces `lazywm-cockpit`, a custom dashboard surface living on the `cockpit` 
 
 ## Impact
 
-- New binary `lazywm-cockpit` in the monorepo (cairo/pango client, no new runtime deps beyond foundation's), new IPC query ops if focus statistics are not already exposed, new `lazywmctl ai` subcommand surface for cached summaries shared with `apps categorize`.
-- Depends on change `lazywm-core` (IPC, archetypes, theme, harness invocation helper).
-- Reads `~/projects` and `~/work`; writes only to `~/.cache/lazywm/`.
+- New binary `lazydesk-cockpit` in the monorepo (cairo/pango client, no new runtime deps beyond foundation's), new IPC query ops if focus statistics are not already exposed, new `lazydeskctl ai` subcommand surface for cached summaries shared with `apps categorize`.
+- Depends on change `lazydesk-core` (IPC, archetypes, theme, harness invocation helper).
+- Reads `~/projects` and `~/work`; writes only to `~/.cache/lazydesk/`.

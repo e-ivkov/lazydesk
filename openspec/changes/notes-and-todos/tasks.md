@@ -13,7 +13,7 @@
 
 ## 3. Browser and integration
 
-- [ ] 3.1 Implement `lazywm-notes` overview (full content inline, recency order, day groups, tag filter), verify the zoomed-out-shows-everything and fresh-capture-tops-the-list scenarios
+- [ ] 3.1 Implement `lazydesk-notes` overview (full content inline, recency order, day groups, tag filter), verify the zoomed-out-shows-everything and fresh-capture-tops-the-list scenarios
 - [ ] 3.2 Implement focused view with editor handoff and filter persistence, verify the zoom-in-filter-edit scenario
 - [ ] 3.3 Implement todo lifecycle actions in the browser, verify complete-from-browser rewrites the marker in `todo.md`
 - [ ] 3.4 Verify end-to-end parity: the same todo captured/managed via palette, bar menu, cockpit, browser, and CLI stays consistent (single source of truth)
