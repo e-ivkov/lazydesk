@@ -23,6 +23,7 @@ static const ld_binding registry[] = {
 	{ "window.snap.right","Windows", "Super+Ctrl+Right","Snap window right half",      LD_ACT_CUSTOM,   "lazydeskctl window snap right", nullptr },
 	{ "window.snap.up",   "Windows", "Super+Ctrl+Up",   "Snap window top / restore",   LD_ACT_CUSTOM,   "lazydeskctl window snap up", nullptr },
 	{ "window.snap.down", "Windows", "Super+Ctrl+Down", "Snap window bottom half",     LD_ACT_CUSTOM,   "lazydeskctl window snap down", nullptr },
+	{ "window.switcher",  "Windows", "Super+Tab",       "Fuzzy window switcher",       LD_ACT_CUSTOM,   "lazydeskctl window switcher", nullptr },
 	{ "window.fullscreen","Windows", "Super+f",         "Toggle fullscreen",           LD_ACT_CUSTOM,   "lazydeskctl window fullscreen", nullptr },
 	{ "window.close",     "Windows", "Super+q",         "Close window",                LD_ACT_CUSTOM,   "lazydeskctl window close", nullptr },
 	/* session group */

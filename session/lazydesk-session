@@ -1,7 +1,32 @@
 #!/bin/sh
-# lazydesk-session — session entry (real implementation in task 3.1)
+# lazydesk-session — session entry (task 3.1)
+# Registers the LazyDesk environment, ensures generated artifacts exist,
+# then execs Niri with the managed config. Niri's spawn-at-startup brings up
+# lazydeskd, the Quickshell shell, and the autospawned archetype stack.
+set -eu
+
+: "${XDG_RUNTIME_DIR:=/run/user/$(id -u)}"
+export XDG_RUNTIME_DIR
+mkdir -p "$XDG_RUNTIME_DIR/lazydesk"
+
 export LAZYDESK=1
 export XDG_CURRENT_DESKTOP=lazydesk
 export XDG_SESSION_TYPE=wayland
-echo "lazydesk-session: skeleton; exec Hyprland lands in task 3.1" >&2
-exit 1
+export LAZYDESK_SOCKET="$XDG_RUNTIME_DIR/lazydesk/ipc.sock"
+
+# Ensure configuration artifacts exist (previous-good semantics apply:
+# an invalid config keeps the last good generation and fails loudly).
+if ! lazydesk config regen; then
+	notify-send -u critical "LazyDesk" "config regen failed — check ~/.config/lazydesk/lazydesk.toml" \
+		2>/dev/null || true
+	echo "lazydesk-session: config regen failed" >&2
+	exit 1
+fi
+
+CONF="$HOME/.config/lazydesk/generated/niri.kdl"
+if [ ! -f "$CONF" ]; then
+	echo "lazydesk-session: $CONF missing after regen" >&2
+	exit 1
+fi
+
+exec niri -c "$CONF"

@@ -10,3 +10,7 @@ test('cli acceptance', find_program('cli.sh'),
   args : [join_paths(meson.build_root(), 'tools/lazydesk'), meson.source_root()])
 test('regen acceptance', find_program('regen.sh'),
   args : [join_paths(meson.build_root(), 'tools/lazydesk'), meson.source_root()])
+test('ipc acceptance', find_program('ipc.sh'),
+  args : [join_paths(meson.build_root(), 'ctl/lazydeskctl'),
+          join_paths(meson.build_root(), 'daemon/lazydeskd'),
+          meson.source_root()])

@@ -34,3 +34,5 @@ install_subdir('config',  install_dir : pkgdatadir)
 install_subdir('data/deps', install_dir : join_paths(pkgdatadir, 'deps'), strip_directory : true)
 install_subdir('skill',   install_dir : pkgdatadir)
 install_data('session/lazydesk-session', install_dir : get_option('bindir'))
+install_data('data/wayland-sessions/lazydesk.desktop',
+  install_dir : join_paths(prefix, get_option('datadir'), 'wayland-sessions'))
