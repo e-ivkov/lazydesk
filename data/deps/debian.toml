@@ -1,6 +1,7 @@
 # LazyDesk dependency map — Debian (apt)
 [packages]
-hyprland = "hyprland"
+quickshell = "quickshell"
+niri = "niri"
 
 ghostty = "ghostty"
 chromium = "chromium"

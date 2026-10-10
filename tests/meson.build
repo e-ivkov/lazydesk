@@ -8,3 +8,5 @@ test('toml parse', test_toml,
           join_paths(meson.source_root(), 'themes/catppuccin-mocha.toml')])
 test('cli acceptance', find_program('cli.sh'),
   args : [join_paths(meson.build_root(), 'tools/lazydesk'), meson.source_root()])
+test('regen acceptance', find_program('regen.sh'),
+  args : [join_paths(meson.build_root(), 'tools/lazydesk'), meson.source_root()])

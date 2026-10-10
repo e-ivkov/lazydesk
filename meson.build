@@ -13,7 +13,7 @@ cfg = configuration_data()
 cfg.set_quoted('LAZYDESK_VERSION', meson.project_version())
 cfg.set_quoted('LAZYDESK_PKGDATADIR', pkgdatadir)
 cfg.set_quoted('LAZYDESK_BINDIR', bindir)
-configure_file(output : 'config.h', configuration : cfg)
+configure_file(output : 'lazydesk-build.h', configuration : cfg)
 
 root_inc = include_directories('.')
 

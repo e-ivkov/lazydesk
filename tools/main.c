@@ -9,8 +9,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "config.h"
+#include "lazydesk-build.h"
 #include "lazydesk.h"
+#include "lazydesk-build.h"
+#include "generate.h"
 #include "toml.h"
 
 static const char *usage =
@@ -148,44 +150,56 @@ static int cmd_doctor(bool archetypes_only)
 	return rc;
 }
 
-static int cmd_config_regen(void)
+static char *find_config(void)
 {
-	/* Full validation + generation is task 2.x; parse check now. */
+	static char path[512];
 	const char *home = getenv("HOME");
-	char path[512];
-	const char *src = nullptr;
 	FILE *f;
-
-	snprintf(path, sizeof path, "%s/.config/lazydesk/lazydesk.toml", home);
-	if ((f = fopen(path, "r")) != nullptr) {
-		fclose(f);
-		src = path;
-	} else {
-		snprintf(path, sizeof path, "%s/config/lazydesk.toml", ld_datadir());
-		if ((f = fopen(path, "r")) != nullptr) {
+	const char *candidates[3] = { 0 };
+	static char a[512], b[512], c[512];
+	snprintf(a, sizeof a, "%s/.config/lazydesk/lazydesk.toml", home);
+	snprintf(b, sizeof b, "%s/config/lazydesk.toml", ld_datadir());
+	snprintf(c, sizeof c, "%s/data/config/lazydesk.toml", ld_datadir());
+	candidates[0] = a; candidates[1] = b; candidates[2] = c;
+	for (int i = 0; i < 3; i++)
+		if ((f = fopen(candidates[i], "r")) != nullptr) {
 			fclose(f);
-			src = path;
-		} else {
-			snprintf(path, sizeof path, "%s/data/config/lazydesk.toml", ld_datadir());
-			if ((f = fopen(path, "r")) != nullptr) {
-				fclose(f);
-				src = path;
-			}
+			snprintf(path, sizeof path, "%s", candidates[i]);
+			return path;
 		}
-	}
+	return nullptr;
+}
+
+/* regen: parse+validate (previous-good on failure), then emit artifacts. */
+static int cmd_config_regen(bool force, const char *out_dir)
+{
+	char *src = find_config();
 	if (!src)
 		die("no config found (looked in ~/.config/lazydesk and installed defaults)");
 
-	char err[256];
-	f = fopen(src, "r");
-	toml_table_t *root = toml_parse_file(f, err, sizeof err);
-	fclose(f);
-	if (!root) {
-		fprintf(stderr, "lazydesk: invalid %s: %s\n", src, err);
+	ld_config cfg;
+	char err[512];
+	if (!ld_config_load(&cfg, src, err, sizeof err)) {
+		fprintf(stderr, "lazydesk: invalid config, artifacts untouched: %s\n", err);
 		return 1;
 	}
-	toml_free(root);
-	printf("config %s: parse OK (full validation + generator in task group 2)\n", src);
+	ld_theme theme;
+	if (!ld_theme_load(&theme, ld_datadir(), cfg.theme, err, sizeof err)) {
+		fprintf(stderr, "lazydesk: invalid config, artifacts untouched: %s\n", err);
+		return 1;
+	}
+
+	if (opt_dry_run) {
+		printf("config %s: valid; would regenerate into %s:\n"
+		       "  hyprland.conf, ghostty-lazydesk.conf, shell/Theme.qml, shell/shell.qml, registry.json\n",
+		       src, out_dir);
+		return 0;
+	}
+	if (!ld_generate_all(&cfg, &theme, out_dir, force, err, sizeof err)) {
+		fprintf(stderr, "lazydesk: %s\n", err);
+		return 1;
+	}
+	printf("config %s: OK — artifacts regenerated in %s\n", src, out_dir);
 	return 0;
 }
 
@@ -226,8 +240,19 @@ int main(int argc, char **argv)
 		printf("update: not implemented yet (packaging tasks)\n");
 		return 0;
 	}
-	if (!strcmp(cmd, "config") && sub && !strcmp(sub, "regen"))
-		return cmd_config_regen();
+	if (!strcmp(cmd, "config") && sub && !strcmp(sub, "regen")) {
+		const char *out = getenv("LAZYDESK_OUT_DIR");
+		char outdir[512];
+		if (!out) {
+			const char *home = getenv("HOME");
+			snprintf(outdir, sizeof outdir, "%s/.config/lazydesk/generated", home);
+			out = outdir;
+		}
+		bool force = false;
+		for (int k = i + 1; k < argc; k++)
+			if (!strcmp(argv[k], "--force")) force = true;
+		return cmd_config_regen(force, out);
+	}
 
 	fprintf(stderr, "lazydesk: unknown command '%s'\n\n%s", cmd, usage);
 	return 2;

@@ -8,14 +8,14 @@
 
 ## 2. Config model and generator
 
-- [ ] 2.1 Implement TOML config model (archetypes, bindings, rules, spawns, scratchpad, harness, idle, outputs, theme, categories) with validation and previous-good semantics, verify an invalid edit is rejected with the offending key named
-- [ ] 2.2 Implement the generator emitting `hyprland.conf` (bindings, windowrules, workspaces, exec-once, env) with `# lazydesk-managed` markers, verify a headless Hyprland loads the generated config with zero warnings
+- [x] 2.1 Implement TOML config model (archetypes, bindings, rules, spawns, scratchpad, harness, idle, outputs, theme, categories) with validation and previous-good semantics, verify an invalid edit is rejected with the offending key named
+- [x] 2.2 Implement the generator emitting `niri.kdl` (binds, window rules, workspaces, spawn-at-startup, env) with `lazydesk-managed` markers, verify `niri validate` passes the generated config with zero errors
 - [ ] 2.3 Emit the Quickshell shell config (bar, action menu, cheatsheet, notifications, OSD) with theme tokens as a QML module, plus the ghostty include (theme, quick-terminal stanza), from the same model, verify the Quickshell shell starts with its generated config
-- [ ] 2.4 Implement drift detection for managed artifacts, verify the hand-edited-managed-file scenario (refuses silent overwrite, reports drift)
+- [x] 2.4 Implement drift detection for managed artifacts, verify the hand-edited-managed-file scenario (refuses silent overwrite, reports drift)
 
 ## 3. Session and window policy
 
-- [ ] 3.1 Implement `lazydesk-session` (env export, socket dir, Hyprland launch with generated config, component startup incl. `lazydeskd` and the Quickshell shell), verify login reaches a desktop with bar on a test machine
+- [ ] 3.1 Implement `lazydesk-session` (env export, socket dir, Niri launch with generated config, component startup incl. `lazydeskd` and the Quickshell shell), verify login reaches a desktop with bar on a test machine
 - [ ] 3.2 Implement maximized-by-default policy via generated windowrules (dialogs/transients float, per-app overrides), verify the file-picker, forced-maximize, and second-window scenarios from the window-management spec
 - [ ] 3.3 Implement archetype routing rules + spawn-wrapper class injection (two-ghostty scenario), verify every workspaces-spec scenario incl. alternative bindings (editor→nvim, browser→firefox, terminal→foot)
 - [ ] 3.4 Implement snapping binds (halves, quarters, restore), fullscreen toggle, focus cycling, urgency passthrough, verify against the window-management and workspaces scenarios
@@ -50,7 +50,7 @@
 
 ## 8. Integration, packaging, agentless proof
 
-- [ ] 8.1 Wire headless smoke CI (Hyprland headless + `lazydeskctl` assertions) covering one scenario per capability, green on Void and Debian/Ubuntu containers
+- [ ] 8.1 Wire headless smoke CI (`niri validate` + `niri` headless smoke + `lazydeskctl` assertions) covering one scenario per capability, green on Void and Debian/Ubuntu containers
 - [ ] 8.2 Verify `lazydesk install` end-to-end on clean Void and one apt distro (session entry in greetd/DM list, archetype completeness on first login, portable-config scenario by copying `~/.config/lazydesk/` to a second machine/container)
 - [ ] 8.3 Verify full agentless boot: no harness installed, all functions work, AI features visibly degraded, config untouched by categorize
 - [ ] 8.4 Daily-drive the session for one week on the Void machine, keep the friction log, fix P0s, file follow-up proposals for the rest

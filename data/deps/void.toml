@@ -1,7 +1,7 @@
 # LazyDesk dependency map — Void Linux (xbps)
 [packages]
 quickshell = "quickshell"
-hyprland = "Hyprland"
+niri = "niri"
 ghostty = "ghostty"
 chromium = "chromium"
 telegram-desktop = "Telegram-desktop"

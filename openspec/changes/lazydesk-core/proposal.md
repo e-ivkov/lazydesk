@@ -6,12 +6,12 @@ A solo C/Rust developer's ideal desktop — maximized-first archetype workspaces
 
 ## What Changes
 
-This is the first working LazyDesk session, as a packageable DE on the Hyprland backend:
+This is the first working LazyDesk session, as a packageable DE on the Niri backend:
 
-- **TOML as the single source of truth** (`~/.config/lazydesk/`): archetypes, bindings, window rules, spawn entries, scratchpad, harness, idle, outputs, themes, palette categories. A generator emits backend configs (hyprland.conf), the Quickshell shell config (bar, action menu, cheatsheet, notifications, OSD), the terminal include, and the keybinding registry — managed artifacts are marked and drift-checked.
+- **TOML as the single source of truth** (`~/.config/lazydesk/`): archetypes, bindings, window rules, spawn entries, scratchpad, harness, idle, outputs, themes, palette categories. A generator emits the backend config (niri.kdl), the Quickshell shell config (bar, action menu, cheatsheet, notifications, OSD), the terminal include, and the keybinding registry — managed artifacts are marked and drift-checked, and `niri validate` gates every backend config.
 - **`lazydeskd` + `lazydeskctl`: LazyDesk's own stable IPC facade** (NDJSON socket, event stream, every action) over the compositor's IPC; clients and AI agents never touch backend IPC, so the backend stays swappable (sway adapter possible later).
-- Archetype workspaces routed by app-id/class rules + a spawn wrapper that injects distinguishing classes for same-binary archetypes (a Pi terminal and a plain terminal side by side).
-- Maximimized-by-default window policy via backend rules: dialogs/transients float, per-app overrides, half/quarter snapping, no tiling tree.
+- Archetype workspaces routed by app-id rules (`open-on-workspace`) + a spawn wrapper that injects distinguishing app-ids for same-binary archetypes (a Pi terminal and a plain terminal side by side).
+- Maximized-by-default window policy via backend rules: dialogs/transients float, per-app overrides, half/quarter snapping, no tiling tree.
 - A Super-based keymap generated from the binding registry; the **bar's dropdown action menu and keybinding cheatsheet are generated from the same registry**, guaranteeing click/keyboard parity.
 - One command palette (`lazydesk-menu`, our layer-shell client): fuzzy apps over a category tree, `>` WM verbs, `!` shell passthrough.
 - Scratchpad via Ghostty's built-in quick terminal (zero custom code); idle screen-off without any lock screen; autospawned stack with `LAZYDESK_*` environment.
@@ -45,5 +45,5 @@ Out of scope for this change (follow-ups): the cockpit dashboard (`cockpit-dashb
 ## Impact
 
 - New monorepo: `lazydeskd` (facade daemon), `lazydeskctl` (CLI), `lazydesk-menu` (palette client), `lazydesk` (install/update CLI + generator), session scripts, agent skill, docs, theme packs, config templates; C23 + meson for binaries, POSIX shell where a script beats C.
-- Runtime dependencies: Hyprland (backend), ghostty, quickshell (shell surfaces), Thunar (files archetype), plus small utilities; all packaged on Void/Debian/Ubuntu.
+- Runtime dependencies: Niri (backend), ghostty, quickshell (shell surfaces), Thunar (files archetype), plus small utilities; all packaged on Void/Debian/Ubuntu.
 - The user's daily machine (Void) is the test bed; `foundation-maximized-shell` (own-compositor design) is retired from the plan — its behavior specs were carried into this change, only the foundation decision changed.

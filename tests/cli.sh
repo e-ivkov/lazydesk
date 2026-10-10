@@ -11,9 +11,9 @@ trap 'rm -rf "$TMP"' EXIT
 "$BIN" --distro ubuntu --dry-run install > "$TMP/ubuntu.plan"
 
 grep -q 'xbps-install -S' "$TMP/void.plan"   || { echo "FAIL void install tool"; cat "$TMP/void.plan"; exit 1; }
-grep -q 'Hyprland'        "$TMP/void.plan"   || { echo "FAIL void pkg case"; exit 1; }
+grep -q 'niri'            "$TMP/void.plan"   || { echo "FAIL void niri pkg"; exit 1; }
 grep -q 'apt-get install' "$TMP/debian.plan" || { echo "FAIL debian install tool"; exit 1; }
-grep -q 'mako-notifications' "$TMP/debian.plan" || { echo "FAIL debian mako pkg name"; exit 1; }
+grep -q 'quickshell' "$TMP/debian.plan" || { echo "FAIL debian quickshell pkg"; exit 1; }
 grep -q 'apt-get install' "$TMP/ubuntu.plan" || { echo "FAIL ubuntu"; exit 1; }
 grep -q 'plan OK' "$TMP/void.plan" || { echo "FAIL plan incomplete"; exit 1; }
 echo "dry-run plans: OK (void/debian/ubuntu)"
