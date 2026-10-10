@@ -28,7 +28,7 @@ The bar SHALL show a default-harness indicator that is active when the harness p
 - **THEN** the pi workspace is focused with the harness terminal on top
 
 ### Requirement: Bar action menu with shortcut parity
-The bar SHALL provide a dropdown menu listing every user action reachable by keybinding (window management, workspace operations, launching, session commands), organized by the binding groups. Each menu item MUST show its current keybinding alongside the action name, and activating an item MUST perform exactly the same operation as the binding (same action registry, same IPC verbs). The menu MUST be reachable by pointer click on every output's bar and include a "show keybindings" entry.
+The bar SHALL provide a dropdown menu listing every user action (bound or bindable), organized by the binding groups. Each menu item MUST show its current keybinding alongside the action name where one is bound, and activating an item MUST perform exactly the same operation as the binding (same action registry, same IPC verbs). The menu MUST be reachable by pointer click on every output's bar and include a "show keybindings" entry.
 
 #### Scenario: Menu item equals keybinding
 - **WHEN** the user clicks "new workspace" in the bar menu

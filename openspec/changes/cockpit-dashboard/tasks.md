@@ -18,6 +18,7 @@
 - [ ] 3.2 Implement language/size histogram with ignore patterns, verify `node_modules` and build dirs are skipped and counts match a known fixture repo
 - [ ] 3.3 Implement ranking (decayed git activity + persisted focus time) and pinned projects, verify pinned-stays-top and top-used ordering scenarios
 - [ ] 3.4 Implement `~/work` top-files and type-breakdown report, verify the recently-modified scenario
+- [ ] 3.5 Implement todos and recent-notes panels over the shared notes stores with complete/reopen and open-in-editor actions, verify both cockpit scenarios in the cockpit spec (depends on the notes-and-todos change's verbs)
 
 ## 4. AI summaries and actions
 

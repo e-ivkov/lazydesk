@@ -66,6 +66,17 @@ The cockpit SHALL analyze `~/work` and present its top files ranked by recency a
 - **WHEN** a file in `~/work` was modified minutes ago and the cockpit refreshes
 - **THEN** the file appears at or near the top of the work panel
 
+### Requirement: Todos and notes panels
+The cockpit SHALL display the open todos from the shared todo store and the most recent notes from the shared notes directory (see the notes-todos capability), with actions to complete/reopen todos and open notes in the editor archetype — all via public IPC verbs. These panels MUST function agentless and MUST reflect external edits to the underlying files without restart.
+
+#### Scenario: Complete a todo from cockpit
+- **WHEN** the user completes a todo on the cockpit panel
+- **THEN** the corresponding `- [ ]` becomes `- [x]` in `todo.md` and the count updates
+
+#### Scenario: Recently captured note listed
+- **WHEN** a note was just captured from the palette and the cockpit refreshes
+- **THEN** it appears at the top of the recent-notes panel
+
 ### Requirement: Read-only analysis with bounded cost
 The cockpit MUST NOT modify anything under `~/projects` or `~/work`; its only writes are to its own cache. Scans MUST run asynchronously, be rate-limited, honor ignore patterns for large/irrelevant directories (e.g. `node_modules`, `.git` internals, build outputs), and never block dashboard interaction or the session while running.
 

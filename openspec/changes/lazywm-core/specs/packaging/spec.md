@@ -6,6 +6,20 @@ Defines how LazyWM is shipped and installed as a packageable, reusable DE on top
 
 ## ADDED Requirements
 
+### Requirement: Install guarantees archetype completeness
+After `lazywm install` finishes, every archetype in the shipped default configuration SHALL resolve to an installed, launchable app: the installer installs the per-distro package for each default binding (or an available configured alternative) and verifies the command resolves.
+
+#### Scenario: Fresh install is complete
+- **WHEN** `lazywm install` completes on a clean system with default configuration
+- **THEN** all seven numbered archetypes plus `files` and the scratchpad terminal launch successfully on first login
+
+### Requirement: Doctor reports unfilled archetypes
+When a user configuration binds custom commands, install and `doctor` MUST verify each binding, report exactly which archetypes are unfilled with concrete fix suggestions, and exit non-zero until resolved — an install that would leave empty archetype workspaces must never finish silently.
+
+#### Scenario: Custom binding reported
+- **WHEN** `lazywm doctor` runs with `editor` bound to a custom binary that is not installed
+- **THEN** it names the `editor` archetype, the missing command, and a suggested fix, and exits non-zero
+
 ### Requirement: Install and update via the lazywm CLI
 LazyWM SHALL be installable and updatable through a single `lazywm` CLI (install, update, config regeneration, doctor) that works on Void, Debian, and Ubuntu: detects the distro, installs or verifies backend and component dependencies (compositor, terminal, bar, notification daemon, file manager), installs LazyWM's own binaries and data files, and registers the session entry. A dry-run mode MUST show planned actions before any change.
 

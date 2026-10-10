@@ -17,9 +17,10 @@ This is the first working LazyWM session, as a packageable DE on the Hyprland ba
 - Scratchpad via Ghostty's built-in quick terminal (zero custom code); idle screen-off without any lock screen; autospawned stack with `LAZYWM_*` environment.
 - Harness integration: `Super+a` focus-or-spawn Pi, shipped `lazywm` agent skill, harness-driven app categorization, agent-editable hot-reloadable config, guaranteed agentless fallback mode.
 - Consistent minimal theming from one token set: catppuccin-mocha default (matching the Pi harness theme), catppuccin-latte, and common dark alternatives; waybar bar + mako notifications themed from the same tokens.
-- **Packaging**: `lazywm` install/update/doctor CLI (Void first-class, Debian/Ubuntu supported, no systemd assumption), dry-run mode, portable declarative user config.
+- **Packaging**: `lazywm` install/update/doctor CLI (Void first-class, Debian/Ubuntu supported, no systemd assumption), dry-run mode, portable declarative user config — and install completeness: every shipped archetype must end up filled with a launchable app or be explicitly reported.
+- **System controls** on established utilities: screenshots and region capture, screen recording, persistent clipboard history, volume/brightness keys with OSD, battery notifications — wired via generated binds and scripts, no custom daemons.
 
-Out of scope for this change (follow-ups): the cockpit dashboard (`cockpit-dashboard` change), settings UI (`settings-ui` change), agents/usage panels, crash-to-harness diagnosis, theme sync into apps, portals beyond the backend's own, a custom file manager (established managers reused behind the `files` archetype).
+Out of scope for this change (follow-ups): the cockpit dashboard (`cockpit-dashboard` change), settings UI (`settings-ui` change), todos and quick notes (`notes-and-todos` change), agents/usage panels, crash-to-harness diagnosis, theme sync into apps, portals beyond the backend's own, a custom file manager (established managers reused behind the `files` archetype).
 
 ## Capabilities
 
@@ -34,7 +35,8 @@ Out of scope for this change (follow-ups): the cockpit dashboard (`cockpit-dashb
 - `ipc` — LazyWM-owned NDJSON socket protocol, `lazywmctl` CLI, event stream, facade stability over the compositor backend.
 - `harness-integration` — default harness focus-or-spawn, harness-driven app categorization, agent skill, agent-editable configuration, agentless fallback.
 - `shell-ui` — bar (with action menu and keybinding cheatsheet), notifications, and one shared minimal theme with shipped presets.
-- `packaging` — install/update CLI, declarative portable config, managed generated artifacts, distro-agnostic packaging.
+- `packaging` — install/update CLI with archetype completeness guarantee, declarative portable config, managed generated artifacts, distro-agnostic packaging.
+- `system-controls` — capture, clipboard history, volume/brightness OSD, battery awareness, built on established utilities.
 
 ### Modified Capabilities
 

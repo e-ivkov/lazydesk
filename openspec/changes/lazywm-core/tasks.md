@@ -4,7 +4,7 @@
 
 - [ ] 1.1 Create the monorepo layout (`daemon/`, `ctl/`, `menu/`, `tools/lazywm` CLI, `session/`, `themes/`, `skill/lazywm`, `docs/`, config templates) with meson building a C23 hello for each binary, verify `meson setup build && ninja -C build` succeeds
 - [ ] 1.2 Vendor tomlc and the JSON library, verify round-trip unit tests pass
-- [ ] 1.3 Implement the `lazywm` CLI skeleton (install/update/config regen/doctor, dry-run, per-distro dependency maps for Void/Debian/Ubuntu), verify dry-run on all three distros prints a correct plan (container or VM)
+- [ ] 1.3 Implement the `lazywm` CLI skeleton (install/update/config regen/doctor, dry-run, per-distro dependency maps for Void/Debian/Ubuntu) including archetype-completeness maps and verification, verify dry-run on all three distros prints a correct plan and the completeness scenarios pass
 
 ## 2. Config model and generator
 
@@ -51,9 +51,17 @@
 ## 8. Integration, packaging, agentless proof
 
 - [ ] 8.1 Wire headless smoke CI (Hyprland headless + `lazywmctl` assertions) covering one scenario per capability, green on Void and Debian/Ubuntu containers
-- [ ] 8.2 Verify `lazywm install` end-to-end on clean Void and one apt distro (session entry in greetd/DM list, portable-config scenario by copying `~/.config/lazywm/` to a second machine/container)
+- [ ] 8.2 Verify `lazywm install` end-to-end on clean Void and one apt distro (session entry in greetd/DM list, archetype completeness on first login, portable-config scenario by copying `~/.config/lazywm/` to a second machine/container)
 - [ ] 8.3 Verify full agentless boot: no harness installed, all functions work, AI features visibly degraded, config untouched by categorize
 - [ ] 8.4 Daily-drive the session for one week on the Void machine, keep the friction log, fix P0s, file follow-up proposals for the rest
+
+## 9. System controls
+
+- [ ] 9.1 Implement screenshot and region-capture scripts with generated binds, clipboard copy, and path notification, verify the region-screenshot scenario
+- [ ] 9.2 Implement toggleable region recording with indicator and stop notification, verify the record-and-stop scenario
+- [ ] 9.3 Implement clipboard history (persistence + `Super+v` viewer overlay + clear verb), verify the recall-an-earlier-copy scenario
+- [ ] 9.4 Wire volume/mute/brightness/media keys with OSD and battery notifications, verify the volume-key and low-battery scenarios
+- [ ] 9.5 Verify controls survive facade restart (screenshot, volume, clipboard history all function with `lazywmd` stopped)
 
 ## Workflow follow-up
 

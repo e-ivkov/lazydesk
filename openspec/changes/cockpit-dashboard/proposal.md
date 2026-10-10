@@ -13,6 +13,7 @@ Introduces `lazywm-cockpit`, a custom dashboard surface living on the `cockpit` 
 - AI overview: default harness configured/running state, last app-categorization result, cached AI summary freshness, agentless badge in fallback mode.
 - Projects panel: `~/projects` scan producing pinned + top-used projects (ranked by git activity recency and tracked focus time), each with branch, dirty state, last commit, per-language breakdown, and a cached AI summary of recent edits (git-stat only when agentless); actions to open in editor, open in file manager, copy path.
 - Work panel: `~/work` top files by recency and size with a type/language breakdown report and optional AI summary.
+- Todos and notes panels: open todos and recent notes from the shared `~/notes` stores, actionable via public verbs (see the `notes-and-todos` change).
 - Read-only analysis guarantee: cockpit never modifies projects or work data; all actions go through public IPC.
 
 ## Capabilities
