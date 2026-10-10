@@ -32,4 +32,6 @@ if [ ! -f "$CONF" ]; then
 	exit 1
 fi
 
-exec niri -c "$CONF"
+# Always capture the backend's own output for diagnosis (emptty discards it).
+mkdir -p "$HOME/.local/state/lazydesk"
+exec niri -c "$CONF" >"$HOME/.local/state/lazydesk/session.log" 2>&1
