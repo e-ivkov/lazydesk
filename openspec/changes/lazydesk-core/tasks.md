@@ -2,9 +2,9 @@
 
 ## 1. Repository and packaging scaffold
 
-- [ ] 1.1 Create the monorepo layout (`daemon/`, `ctl/`, `menu/`, `tools/lazydesk` CLI, `session/`, `themes/`, `skill/lazydesk`, `docs/`, config templates) with meson building a C23 hello for each binary, verify `meson setup build && ninja -C build` succeeds
-- [ ] 1.2 Vendor tomlc and the JSON library, verify round-trip unit tests pass
-- [ ] 1.3 Implement the `lazydesk` CLI skeleton (install/update/config regen/doctor, dry-run, per-distro dependency maps for Void/Debian/Ubuntu) including archetype-completeness maps and verification, verify dry-run on all three distros prints a correct plan and the completeness scenarios pass
+- [x] 1.1 Create the monorepo layout (`daemon/`, `ctl/`, `menu/`, `tools/lazydesk` CLI, `session/`, `themes/`, `skill/lazydesk`, `docs/`, config templates) with meson building a C23 hello for each binary, verify `meson setup build && ninja -C build` succeeds
+- [x] 1.2 Vendor tomlc and the JSON library, verify round-trip unit tests pass
+- [x] 1.3 Implement the `lazydesk` CLI skeleton (install/update/config regen/doctor, dry-run, per-distro dependency maps for Void/Debian/Ubuntu) including archetype-completeness maps and verification, verify dry-run on all three distros prints a correct plan and the completeness scenarios pass
 
 ## 2. Config model and generator
 

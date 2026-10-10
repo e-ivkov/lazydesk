@@ -1,0 +1,12 @@
+# App category tree for the palette (AI-regenerable via `lazydeskctl apps categorize`)
+# lock = true entries survive regeneration.
+[dev]
+editor = { entry = "org.wezfurlong.wezterm", lock = false }
+[dev.editors]
+zed = { entry = "dev.zed.Zed", lock = false }
+[net]
+chromium = { entry = "chromium", lock = false }
+[chat]
+telegram = { entry = "org.telegram.desktop", lock = false }
+[files]
+thunar = { entry = "thunar", lock = false }

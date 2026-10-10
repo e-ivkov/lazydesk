@@ -1,0 +1,61 @@
+# LazyDesk default configuration (shipped template; copy to ~/.config/lazydesk/)
+# This is the single source of truth — generators turn it into backend configs.
+
+theme = "catppuccin-mocha"
+terminal = "ghostty"
+idle_minutes = 10
+
+[archetypes.agent]
+command = "ghostty --class=lazydesk-agent -e pi"
+
+[archetypes.editor]
+command = "zed"
+
+[archetypes.terminal]
+command = "ghostty --class=lazydesk-term"
+
+[archetypes.browser]
+command = "chromium"
+
+[archetypes.messenger]
+command = "telegram-desktop"
+
+[archetypes.cockpit]
+command = "lazydesk-cockpit"
+
+[archetypes.lazygit]
+command = "ghostty --class=lazydesk-git -e lazygit"
+
+[archetypes.desk]
+command = "lazydesk-settings"
+
+[archetypes.files]
+command = "thunar"
+
+[[spawn]]
+archetype = "agent"
+autostart = true
+
+[[spawn]]
+archetype = "editor"
+autostart = true
+
+[[spawn]]
+archetype = "browser"
+autostart = true
+
+[[spawn]]
+archetype = "messenger"
+autostart = true
+
+[harness]
+command = "ghostty --class=lazydesk-agent -e pi"
+agentless_fallback = "ghostty --class=lazydesk-agent"
+
+[scratchpad]
+command = "ghostty"
+height_pct = 40
+
+[notes]
+dir = "~/notes"
+todo_file = "~/notes/todo.md"

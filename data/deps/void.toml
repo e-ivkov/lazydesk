@@ -1,0 +1,22 @@
+# LazyDesk dependency map — Void Linux (xbps)
+[packages]
+hyprland = "Hyprland"
+waybar = "waybar"
+mako = "mako"
+ghostty = "ghostty"
+chromium = "chromium"
+telegram-desktop = "Telegram-desktop"
+thunar = "Thunar"
+lazygit = "lazygit"
+grim = "grim"
+slurp = "slurp"
+wl-clipboard = "wl-clipboard"
+cliphist = "cliphist"
+brightnessctl = "brightnessctl"
+pipewire = "pipewire"
+seatd = "seatd"
+
+[optional]
+wf-recorder = "wf-recorder"
+zed = "zed"
+foot = "foot"

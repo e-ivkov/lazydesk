@@ -1,0 +1,19 @@
+name = "tokyo-night"
+appearance = "dark"
+[palette]
+bg = "#1a1b26"
+bg_alt = "#16161e"
+surface = "#292e42"
+text = "#c0caf5"
+muted = "#a9b1d6"
+dim = "#565f89"
+accent = "#7aa2f7"
+success = "#9ece6a"
+warning = "#e0af68"
+error = "#f7768e"
+info = "#7dcfff"
+[font]
+family = "monospace"
+size = 11
+[radius]
+corner = 6

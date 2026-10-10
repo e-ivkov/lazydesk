@@ -1,0 +1,20 @@
+# LazyDesk dependency map — Ubuntu (apt)
+[packages]
+hyprland = "hyprland"
+waybar = "waybar"
+mako = "mako-notifications"
+ghostty = "ghostty"
+chromium = "chromium"
+telegram-desktop = "telegram-desktop"
+thunar = "thunar"
+lazygit = "lazygit"
+grim = "grim"
+slurp = "slurp"
+wl-clipboard = "wl-clipboard"
+cliphist = "cliphist"
+brightnessctl = "brightnessctl"
+pipewire = "pipewire"
+
+[optional]
+zed = "zed"
+foot = "foot"

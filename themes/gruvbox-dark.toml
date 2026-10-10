@@ -1,0 +1,19 @@
+name = "gruvbox-dark"
+appearance = "dark"
+[palette]
+bg = "#282828"
+bg_alt = "#1d2021"
+surface = "#3c3836"
+text = "#ebdbb2"
+muted = "#bdae93"
+dim = "#928374"
+accent = "#fabd2f"
+success = "#b8bb26"
+warning = "#fe8019"
+error = "#fb4934"
+info = "#83a598"
+[font]
+family = "monospace"
+size = 11
+[radius]
+corner = 4
