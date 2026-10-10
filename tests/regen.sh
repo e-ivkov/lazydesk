@@ -40,7 +40,7 @@ echo "# my hand edit" >> "$H"
 if "$BIN" config regen 2> "$TMP/err"; then echo "FAIL drift accepted"; exit 1; fi
 grep -q 'drifted' "$TMP/err" || { echo "FAIL drift msg"; cat "$TMP/err"; exit 1; }
 "$BIN" config regen --force > /dev/null
-tail -1 "$H" | grep -q 'lazydesk-managed\|exec-once' || { echo "FAIL force did not restore"; exit 1; }
+tail -1 "$H" | grep -q 'lazydesk-managed\|spawn-at-startup' || { echo "FAIL force did not restore"; exit 1; }
 grep -q '# my hand edit' "$H" && { echo "FAIL hand edit survived force"; exit 1; }
 echo "drift: OK"
 
