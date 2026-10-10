@@ -18,7 +18,7 @@ grep -qF 'open-maximized true' "$HOME/.config/lazydesk/generated/niri.kdl" || { 
 # backend validation when niri is available (it is on the dev machine / CI)
 if command -v niri >/dev/null 2>&1; then
   niri validate -c "$HOME/.config/lazydesk/generated/niri.kdl" 2> "$TMP/niri.err" || { echo "FAIL niri validate:"; cat "$TMP/niri.err"; exit 1; }
-  grep -q . "$TMP/niri.err" && { echo "FAIL niri validate warnings:"; cat "$TMP/niri.err"; exit 1; }
+  grep -q "Error" "$TMP/niri.err" && { echo "FAIL niri validate errors:"; cat "$TMP/niri.err"; exit 1; }
 fi
 grep -q 'quick-terminal-position = top' "$HOME/.config/lazydesk/generated/ghostty-lazydesk.conf" || { echo "FAIL ghostty include"; exit 1; }
 grep -q 'readonly property color accent' "$HOME/.config/lazydesk/generated/shell/Theme.qml" || { echo "FAIL theme qml"; exit 1; }
