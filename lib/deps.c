@@ -100,15 +100,15 @@ bool ld_deps_load(ld_deps_map *m, ld_distro d, const char *datadir,
 /* ---------- shipped archetypes ---------- */
 
 static const ld_archetype shipped[] = {
-	{ "agent",     1, "ghostty -e pi",         "ghostty" },
-	{ "editor",    2, "zed",                   "zed" },
-	{ "terminal",  3, "ghostty",               "ghostty" },
-	{ "browser",   4, "chromium",              "chromium" },
-	{ "messenger", 5, "telegram-desktop",      "telegram-desktop" },
-	{ "cockpit",   6, "lazydesk-cockpit",      nullptr }, /* shipped by us */
-	{ "lazygit",   7, "ghostty -e lazygit",    "lazygit" },
-	{ "desk",      0, "lazydesk-settings",     nullptr }, /* shipped by us */
-	{ "files",     0, "thunar",                "thunar" },
+	{ "agent",     1, "ghostty --class=lazydesk-agent -e pi", "ghostty",   "lazydesk-agent" },
+	{ "editor",    2, "zed",   "zed",           "dev.zed.Zed" },
+	{ "terminal",  3, "ghostty --class=lazydesk-term", "ghostty", "lazydesk-term" },
+	{ "browser",   4, "chromium", "chromium",   "chromium" },
+	{ "messenger", 5, "telegram-desktop", "telegram-desktop", "org.telegram.desktop" },
+	{ "cockpit",   6, "lazydesk-cockpit", nullptr, "lazydesk-cockpit" }, /* shipped by us */
+	{ "lazygit",   7, "ghostty --class=lazydesk-git -e lazygit", "lazygit", "lazydesk-git" },
+	{ "desk",      0, "lazydesk-settings", nullptr, "lazydesk-settings" }, /* shipped by us */
+	{ "files",     0, "thunar", "thunar",       "thunar" },
 };
 
 const ld_archetype *ld_archetypes(size_t *count)

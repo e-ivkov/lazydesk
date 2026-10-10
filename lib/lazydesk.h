@@ -53,6 +53,7 @@ typedef struct {
 	int number;          /* 1..7, 0 = unnumbered */
 	const char *command; /* shipped default binding */
 	const char *pkg;     /* package that provides the default command */
+	const char *app_id;  /* Wayland app_id / window class for routing */
 } ld_archetype;
 
 const ld_archetype *ld_archetypes(size_t *count);
